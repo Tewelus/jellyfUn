@@ -10,6 +10,6 @@
         }
     },
     "version": "0.0.1",
-    "maintainer": "Tewel <tewel1@gmx.de>",
+    "maintainer": "Tewelus <tewel1@gmx.de>",
     "framework" : "@CLICK_FRAMEWORK@"
 }
