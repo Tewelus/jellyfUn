@@ -1,0 +1,15 @@
+{
+    "name": "jellyfun.jellyfun",
+    "description": "Jellyfin Web App",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Jellyfun",
+    "hooks": {
+        "jellyfun": {
+            "apparmor": "jellyfun.apparmor",
+            "desktop":  "jellyfun.desktop"
+        }
+    },
+    "version": "@BUILD_VERSION@",
+    "maintainer": "Tewel <tewel1@gmx.de>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}

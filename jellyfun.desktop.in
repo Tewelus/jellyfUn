@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=JellyfUn
+Exec=qmlscene %U qml/Main.qml
+Icon=assets/jellifun.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+
