@@ -6,13 +6,13 @@ https://jellyfin.org/
 
 Jellyfin on Github: https://github.com/jellyfin/jellyfin
 
-Basicly Jellyfin is a webbased application. JellyfUn is a simple App to get compfortable access to your Jellyfin-Server.
+Basically Jellyfin is a web-based application. JellyfUn is a simple App to get comfortable access to your Jellyfin-Server.
 
-It is tested on a Nexus5, so no warrenty that it will run on other devices.
+It is tested on a Nexus5, so no warranty that it will run on other devices.
 
 No background-playback at the moment.
 
-Maybe it's necessary to scale the webview on your device. Use the Settings.
+Maybe it's necessary to scale the web-view on your device. Use the Settings.
 
 ## License
 
