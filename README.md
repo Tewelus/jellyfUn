@@ -2,6 +2,12 @@
 
 An unofficial App to use Jellyfin on your Ubports-Device.
 
+https://jellyfin.org/
+
+Jellyfin on Github: https://github.com/jellyfin/jellyfin
+
+Basicly Jellyfin is a webbased application. JellyfUn is a simple App to get compfortable access to your Jellyfin-Server.
+
 It is tested on a Nexus5, so no warrenty that it will run on other devices.
 
 No background-playback at the moment.
