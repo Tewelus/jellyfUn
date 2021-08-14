@@ -1,10 +1,12 @@
 # Jellyfun
 
-An App to use Jellyfin on your Ubports-Device.
+An unofficial App to use Jellyfin on your Ubports-Device.
+
 It is tested on a Nexus5, so no warrenty that it will run on other devices.
-No background-playback at the moment
 
+No background-playback at the moment.
 
+Maybe it's necessary to scale the webview on your device. Use the Settings.
 
 ## License
 
