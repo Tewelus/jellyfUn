@@ -25,16 +25,9 @@
 
 
 import QtQuick 2.9
-//import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
-//import QtQuick.XmlListModel 2.0
-//import Ubuntu.Components.Popups 1.3
-//import Ubuntu.DownloadManager 1.2
 import QtWebEngine 1.7
 import Qt.labs.settings 1.0
-import QtMultimedia 5.4
-//import Ubuntu.Content 1.3
-//import Ubuntu.Components.ListItems 1.3
 import QtQuick.Window 2.2
 import io.thp.pyotherside 1.3
 import Morph.Web 0.1
@@ -81,7 +74,7 @@ MainView {
     }
 
 
-   // my own Flickable to meet the requirements
+    // my own Flickable to meet the requirements
 
     MouseArea{
         id: flickMouse
@@ -109,13 +102,13 @@ MainView {
             } else {
 
 
-            webViewWrapper.y = root.x
-              }
+                webViewWrapper.y = root.x
+            }
 
         }
 
 
-// Timer to toggle the bottemMenu
+        // Timer to toggle the bottemMenu
 
         Timer{
             id: bottomMenuTimer
@@ -123,7 +116,7 @@ MainView {
 
             onTriggered: {
                 if(!webviewLoader.active){
-                bottomMenue.z = -1
+                    bottomMenue.z = -1
                 }
 
             }
@@ -145,23 +138,23 @@ MainView {
 
                 settings.fullScreenSupportEnabled: true
 
-                    onLoadingChanged: {
+                onLoadingChanged: {
 
-                        if(loadProgress === 100) {
-                            bottomMenuTimer.start()
-                        }
+                    if(loadProgress === 100) {
+                        bottomMenuTimer.start()
                     }
+                }
 
 
-                    onFullScreenRequested: function(request) {
-                               request.accept();
-                               if (request.toggleOn) {
-                                   window.showFullScreen();
-                               }
-                               else {
-                                   window.showNormal();
-                               }
-                            }
+                onFullScreenRequested: function(request) {
+                    request.accept();
+                    if (request.toggleOn) {
+                        window.showFullScreen();
+                    }
+                    else {
+                        window.showNormal();
+                    }
+                }
 
 
                 onScrollPositionChanged: {
@@ -190,7 +183,7 @@ MainView {
                     }
 
 
- // the pull request is only possible if the scroll position is at the top
+                    // the pull request is only possible if the scroll position is at the top
 
                     if (scrollPosition.y !== 0) {
                         flickMouse.drag.maximumY = 0
@@ -202,32 +195,32 @@ MainView {
 
                     }
 
-               }
+                }
 
                 function setFullscreen(fullscreen) {
-                           if (fullscreen) {
-                               if (window.visibility != ApplicationWindow.FullScreen) {
-                                   window.visibility = ApplicationWindow.FullScreen
-                               }
-                           } else {
-                               window.visibility = ApplicationWindow.Windowed
-                           }
-                       }
+                    if (fullscreen) {
+                        if (window.visibility != ApplicationWindow.FullScreen) {
+                            window.visibility = ApplicationWindow.FullScreen
+                        }
+                    } else {
+                        window.visibility = ApplicationWindow.Windowed
+                    }
+                }
 
 
-                           function toggleApplicationLevelFullscreen() {
-                               setFullscreen(visibility !== ApplicationWindow.FullScreen)
-                           }
+                function toggleApplicationLevelFullscreen() {
+                    setFullscreen(visibility !== ApplicationWindow.FullScreen)
+                }
 
-                           Shortcut {
-                               sequence: StandardKey.FullScreen
-                               onActivated: window.toggleApplicationLevelFullscreen()
-                           }
+                Shortcut {
+                    sequence: StandardKey.FullScreen
+                    onActivated: window.toggleApplicationLevelFullscreen()
+                }
 
-                           Shortcut {
-                               sequence: "F11"
-                               onActivated: window.toggleApplicationLevelFullscreen()
-                           }
+                Shortcut {
+                    sequence: "F11"
+                    onActivated: window.toggleApplicationLevelFullscreen()
+                }
 
 
 
@@ -365,8 +358,6 @@ MainView {
     //    }
 
     Component.onCompleted: {
-
-
 
         if(settings.serverUrl === ""){
 
