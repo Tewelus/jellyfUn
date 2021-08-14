@@ -22,7 +22,7 @@ Rectangle {
             text: qsTr('Server:')
             color: "white"
             height: units.gu(4)
-            width: (parent.width - setServerTxt.width) * 0.7
+            width: (parent.width - setServerInputWrapper.width) * 0.7
             x: setServerInputWrapper.x
             y:parent.height/2-height/2
             // anchors {leftMargin: units.gu(3)}
@@ -105,7 +105,7 @@ Rectangle {
         width: parent.width *0.6
         x:(parent.width - width )/2
         y: (parent.height -height) /2
-        source: "banner-light.png"
+        source: "../assets/banner-light.png"
 
         fillMode: Image.PreserveAspectFit
 
