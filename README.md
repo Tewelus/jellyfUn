@@ -1,6 +1,10 @@
 # Jellyfun
 
-Jellyfin Web App
+An App to use Jellyfin on your Ubports-Device.
+It is tested on a Nexus5, so no warrenty that it will run on other devices.
+No background-playback at the moment
+
+
 
 ## License
 
