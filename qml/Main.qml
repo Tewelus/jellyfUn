@@ -512,7 +512,7 @@ MainView {
           width: parent.width / 3
           height: width
           x: parent.width/2 -width/2
-          y:topRow.height + units.gu(5)
+          y: units.gu(5)
 
           onStatusChanged: {
               if(refreshProgressLoader.status == Loader.Ready){
