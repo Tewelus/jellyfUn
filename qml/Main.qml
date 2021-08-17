@@ -26,13 +26,29 @@
 
 import QtQuick 2.9
 import Ubuntu.Components 1.3
-import QtWebEngine 1.7
+import QtWebEngine 1.9
 import Qt.labs.settings 1.0
 import QtQuick.Window 2.2
 import io.thp.pyotherside 1.3
 import Morph.Web 0.1
 
 import "." // QTBUG-34418 importet for the MorphBrowser Part
+
+
+
+import QtQuick.Layouts 1.1
+import QtQuick.XmlListModel 2.0
+import Ubuntu.Components.Popups 1.3
+import Ubuntu.DownloadManager 1.2
+
+
+import Qt.labs.platform 1.0 //for the StandardPaths
+
+import QtMultimedia 5.0
+
+
+import Ubuntu.Content 1.3
+
 
 
 
@@ -50,6 +66,10 @@ MainView {
     property bool waitForScroll: true
     property int lastScrollPosY: 0.0
     property bool myFullScreen: false
+    property string gotLink: "Noch kein Link"
+    property string standartPathData: StandardPaths.writableLocation(StandardPaths.CacheLocation)
+
+    property string m_contentTyp
 
     Settings{
         id: settings
@@ -125,6 +145,18 @@ MainView {
 
         }
 
+        Timer{
+            id: msgBoxTimer
+            interval: 2000
+
+            onTriggered: {
+                msgBoxLoader.active = false
+                msgBoxLoader.shortMsg = false
+
+            }
+
+        }
+
 
         Item {
             id:webViewWrapper
@@ -132,13 +164,105 @@ MainView {
             //  height: root.height - bottomMenue.height
             height: root.height
 
+
+
+
+
+             WebEngineProfile {
+                    id: myWebProfile
+                    storageName: "myProfile"
+                    offTheRecord: false
+                    persistentCookiesPolicy: WebEngineProfile.ForcePersistentCookies
+                    property alias dataPath: myWebProfile.persistentStoragePath
+                    downloadPath: standartPathData.slice(7) + "/Downloads/"
+
+
+
+
+
+
+
+                  //  StandardPaths.writableLocation(StandardPaths.AppDataLocation)
+
+
+
+
+                    onDownloadRequested: {
+
+
+                        console.log("DownloadPath " + download.path)
+
+
+
+                         download.accept()
+                        gotLink = download.path
+                        console.log("DownloadPath " + download.path)
+                        console.log("DownloadRequested")}
+
+                    onDownloadFinished: {
+
+                        console.log("DownloadFinished"  )
+
+                        msgBoxLoader.msgHeadline = "Download Finished"
+                        msgBoxLoader.shortMsg = true
+                        msgBoxLoader.active = true
+                        msgBoxTimer.start()
+
+
+
+
+                                  picker.contentTyp = m_contentTyp;
+                                  picker.url = download.path;
+                                  //  pickerLoader.loaderUrl = path;
+                                  picker.opacity = 1;
+                                  picker.z = 4
+                                  downloadProgressID.opacity = 0
+
+
+
+                    }
+
+
+
+                   Component.onCompleted: { console.log("DATAPATH: " + downloadPath )
+
+                       gotLink = downloadPath
+
+                   }
+
+
+
+                //    dataPath: dataLocation
+
+//                    userScripts: [
+//                              WebEngineScript {
+//                                  id: cssinjection
+//                                  injectionPoint: WebEngineScript.DocumentReady
+//                                  worldId: WebEngineScript.UserWorld
+//                                  sourceCode: "\n(function() {\nvar css = \"* {font-family: \\\"Ubuntu\\\" !important; font-size: 10pt !important;} ytm-pivot-bar-renderer {display: none !important;}\"\n\n;\n\n\nif (typeof GM_addStyle != \"undefined\") {\n\tGM_addStyle(css);\n} else if (typeof PRO_addStyle != \"undefined\") {\n\tPRO_addStyle(css);\n} else if (typeof addStyle != \"undefined\") {\n\taddStyle(css);\n} else {\n\tvar node = document.createElement(\"style\");\n\tnode.type = \"text/css\";\n\tnode.appendChild(document.createTextNode(css));\n\tvar heads = document.getElementsByTagName(\"head\");\n\tif (heads.length > 0) {\n\t\theads[0].appendChild(node); \n\t} else {\n\t\t// no head yet, stick it whereever\n\t\tdocument.documentElement.appendChild(node);\n\t}\n}\n\n})();"
+//                              }
+//                          ]
+
+
+
+            }
+
+
+
+
+
+
+
             WebEngineView{
                 id:myWebview
                 zoomFactor: settings.myZoomFactor
                 anchors.fill: parent
                 url: settings.serverUrl
 
-                settings.fullScreenSupportEnabled: true
+                profile: myWebProfile
+
+
+
 
                 onLoadingChanged: {
 
@@ -512,11 +636,11 @@ MainView {
 
                        var msg = "[JS] (%1:%2) %3".arg(sourceID).arg(lineNumber).arg(message)
                        if (level === WebEngineView.InfoMessageLevel) {
-                           console.log(msg)
+                         //  console.log(msg)
                        } else if (level === WebEngineView.WarningMessageLevel) {
-                           console.warn(msg)
+                         //  console.warn(msg)
                        } else if (level === WebEngineView.ErrorMessageLevel) {
-                           console.error(msg)
+                         //  console.error(msg)
                        }
                    }
 
@@ -540,6 +664,83 @@ MainView {
 
 
             }  // End WebEngineView
+
+
+            Rectangle {
+
+                  id: picker
+                  opacity: 0
+                  z: -1
+                  anchors.fill: parent
+
+                  property var activeTransfer
+                  property string url: "Test.txt"
+                  property var handler
+                  property var contentTyp
+
+                  ContentPeerPicker {
+                      anchors.fill: parent;
+                      contentType: ContentType.All
+                      handler: ContentHandler.Destination
+
+                      onPeerSelected: {
+                          peer.selectionType = ContentTransfer.Single
+                          picker.activeTransfer = peer.request()
+                          picker.activeTransfer.stateChanged.connect(function() {
+                              if (picker.activeTransfer.state === ContentTransfer.InProgress) {
+                                  console.log("In progress");
+                                  picker.activeTransfer.items = [ resultComponent.createObject(parent, {"url": picker.url}) ];
+                                  picker.activeTransfer.state = ContentTransfer.Charged;
+                                  pageStack.pop()
+
+                              }
+                          })
+                      }
+
+
+                      onCancelPressed: {
+                          picker.z = -1
+                          picker.opacity = 0
+                          console.log("picker.url" + picker.url)
+
+
+                      }
+
+                  }
+
+                  ContentTransferHint {
+                      id: transferHint
+                      anchors.fill: parent
+                      activeTransfer:picker.activeTransfer
+                  }
+
+                  Component {
+                      id: resultComponent
+                      ContentItem{}
+                  }
+              } // End picker
+
+
+
+            //ToDo: implement ProgressBar for Download
+
+//            ProgressBar{
+//                    id: downloadProgressID
+//                    minimumValue:0;
+//                    maximumValue:100;
+//                    value: s
+//                    opacity: 0
+//                    z:2
+//                    width: parent.width
+//                    height: units.gu(2)
+//                    x:0
+//                    anchors {
+//                        bottom: parent.bottom
+
+//                    }
+
+//                }
+
 
         }
 
@@ -650,6 +851,37 @@ MainView {
         }
 
 
+
+    }
+
+    Loader {
+            id: msgBoxLoader
+            width: parent.width *0.9
+            height: if(shortMsg){return parent.height / 5}else{return parent.height / 3}
+            x:parent.width /2 -width/2
+            y: if(shortMsg){return units.gu (8)}else{return  units.gu (1)}
+            active: false
+
+            property string msgHeadline
+            property string msgTxt
+            property bool setTxt: false
+            property string txtInput
+            property bool shortMsg: false
+
+            source:"MessageBox.qml"
+
+            onStatusChanged: {
+                if(msgBoxLoader.status == Loader.Ready){
+                    backgrounder.opacity = 0.4
+
+
+
+                    // textInputFolder.forceActiveFocus();
+                }
+                if(msgBoxLoader.status == Loader.Null){
+                   // backgrounder.opacity = 0
+                }
+            }
 
     }
 
