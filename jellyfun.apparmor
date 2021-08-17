@@ -3,21 +3,12 @@
 
     "networking",
     "webview",
-    "accounts",
     "audio",
     "connectivity",
-        "document_files",
-        "content_exchange",
-        "content_exchange_source",
-        "webview",
-        "push-notification-client",
-        "usermetrics",
-        "audio",
-        "music_files",
-        "music_files_read",
-        "video",
-        "video_files",
-        "video_files_read"
+    "content_exchange_source",
+    "webview",
+    "audio",
+    "video"
 
     ],
 

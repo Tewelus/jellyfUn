@@ -9,8 +9,6 @@ Rectangle {
     color: "black"
 
 
-
-
     Rectangle {
         id:settingsServerColum
         color: "black"
@@ -88,7 +86,7 @@ Rectangle {
 
                     } else {
 
-                        console.log("Set server and username")
+                     //   console.log("Set server and username")
 
                                            msgBoxLoader.msgHeadline = "Please set your Server and Username"
                                            msgBoxLoader.active = true
@@ -135,33 +133,7 @@ Rectangle {
 
             }
 
-
-
         }
-        Rectangle{
-            id: gotLInkRect
-
-
-            height: units.gu(4)
-            width: (parent.width - setSettingsServerTxt.width) * 0.7
-            anchors.top: scalingBox.bottom
-            anchors.topMargin: units.gu(10)
-            color: "red"
-            x: setSettingsServerInputWrapper.x
-           // y:parent.height/2-height/2
-
-        TextArea {
-            id: gotLinkText
-            text: root.gotLink
-            width: scalingBox.width
-            height: setZoomSliderTxt.height
-            anchors.fill: parent
-            color: "white"
-             y:parent.height/2-height/2
-
-
-        }
-       }
 
     }
 

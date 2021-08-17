@@ -7,10 +7,6 @@ Rectangle {
     anchors.fill: parent
     color: "black"
 
-
-
-
-
     Rectangle {
         id:serverColum
         color: "black"
@@ -88,10 +84,10 @@ Rectangle {
 
                     } else {
 
-                        console.log("Set server and username")
+                      //  console.log("Set server and username")
 
-                        //                   msgBoxLoader.msgHeadline = "Please set your Server and Username"
-                        //                   msgBoxLoader.active = true
+                                           msgBoxLoader.msgHeadline = "Please set your Server and Username"
+                                           msgBoxLoader.active = true
 
                     }
                 }

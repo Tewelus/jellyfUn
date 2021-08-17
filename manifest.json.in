@@ -9,7 +9,7 @@
             "desktop":  "jellyfun.desktop"
         }
     },
-    "version": "0.0.2",
+    "version": "0.0.3",
     "maintainer": "Tewelus <tewel1@gmx.de>",
     "framework" : "@CLICK_FRAMEWORK@"
 }

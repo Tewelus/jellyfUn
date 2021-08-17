@@ -1,18 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
-import QtQuick.XmlListModel 2.0
-import Ubuntu.Components.Popups 1.3
-import Ubuntu.DownloadManager 1.2
 
-
-import Qt.labs.settings 1.0
-
-import QtMultimedia 5.4
-
-
-
-import Ubuntu.Content 1.3
 
 Rectangle{
     id: msgBoxWrapper
@@ -104,8 +93,6 @@ Rectangle{
             MouseArea{
                 anchors.fill: parent
 
-
-
                 onClicked: {
                     console.log("OK Pressed")
                     msgBoxLoader.active = false
@@ -113,14 +100,8 @@ Rectangle{
 
                         msgBoxLoader.txtInput = msgInputTxt.text
                     }
-
-
                 }
-
-
-
             }
         }
     }
-
 }
