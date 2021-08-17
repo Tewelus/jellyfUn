@@ -6,7 +6,8 @@
     "hooks": {
         "jellyfun": {
             "apparmor": "jellyfun.apparmor",
-            "desktop":  "jellyfun.desktop"
+            "desktop":  "jellyfun.desktop",
+            "content-hub": "src/upTestPython-contentHub.json"
         }
     },
     "version": "0.0.3",

@@ -52,7 +52,6 @@ MainView {
     property bool waitForScroll: true
     property int lastScrollPosY: 0.0
     property bool myFullScreen: false
-    property string gotLink: "Noch kein Link"
     property string standartPathData: StandardPaths.writableLocation(StandardPaths.CacheLocation)
 
     property string m_contentTyp

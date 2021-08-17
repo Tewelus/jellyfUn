@@ -1,0 +1,14 @@
+{
+    "share": [
+        "pictures",
+        "documents",
+        "videos",
+        "music"
+    ],
+    "source": [
+        "pictures",
+        "documents",
+        "videos",
+        "music"
+    ]
+}
